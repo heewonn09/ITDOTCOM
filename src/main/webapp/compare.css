@@ -1,0 +1,256 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: center;
+    color: #f5f5f5;
+    margin-top: 20px;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+.container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+}
+.computer-input-container {
+    margin-bottom: 20px;
+    position: relative;
+}
+.computer-input-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f5f5f5;
+    font-weight: bold;
+}
+.computer-input-container input {
+    width: 95%;
+    padding: 11px;
+    border: none;
+    border-bottom: 2px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    color: #f5f5f5;
+    outline: none;
+    transition: border-bottom 0.3s;
+}
+.computer-input-container input:focus {
+    border-bottom: 1px solid #007bff;
+}
+.autocomplete-suggestions {
+    border: 1px solid #444;
+    border-top: none;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #3c3c3c;
+    position: absolute;
+    z-index: 1000;
+    width: calc(100% - 22px);
+    color: #f5f5f5;
+    border-radius: 0 0 5px 5px;
+}
+.autocomplete-suggestion {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.autocomplete-suggestion:hover {
+    background-color: #5c5c5c;
+}
+.compare-button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.compare-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.compare-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+#comparison-results {
+    padding: 20px;
+    background-color: #3c3c3c;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    transition: opacity 0.3s;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #f5f5f5;
+    margin-top: 20px;
+}
+table, th, td {
+    border: 1px solid #444;
+}
+th, td {
+    padding: 12px;
+    text-align: center;
+    font-size: 1.1em;
+}
+th {
+    background-color: #4c4c4c;
+    font-weight: bold;
+}
+.comment-section {
+    margin-top: 20px;
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.comment-section h2 {
+    color: #f5f5f5;
+    margin-bottom: 10px;
+}
+.comment-section textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #f5f5f5;
+    margin-bottom: 10px;
+    resize: none;
+}
+.comment-section .comment-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.comment-section .comment-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+#comments-container {
+    margin-top: 20px;
+}
+.comment {
+    background-color: #3c3c3c;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.comment p {
+    margin: 0;
+    color: #f5f5f5;
+}
+.comment .comment-time {
+    font-size: 0.8em;
+    color: #ccc;
+    text-align: right;
+}
+/* Add this to the bottom of your existing CSS */
+
+.reply-section {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.reply-section textarea {
+    width: 90%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #f5f5f5;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+.reply-section .reply-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.reply-section .reply-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.delete-button {
+    background-color: #ff4c4c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #ff1c1c;
+    transform: translateY(-2px);
+}
+
+.like-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.like-button:hover {
+    background-color: #388e3c;
+    transform: translateY(-2px);
+}
+
+.like-count {
+    display: inline-block;
+    margin-left: 5px;
+    color: #fff;
+}
+
+.image-display {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.image-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.image-display img {
+    width: 45%;
+    max-width: 300px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}

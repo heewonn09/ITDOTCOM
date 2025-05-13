@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+
+<html lang="">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image">
+    <meta name="robots" content="index, follow">
+    <title>ITDOTCOM</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/tootik/1.0.2/css/tootik.min.css">
+    <link href="test.css" rel="stylesheet">
+    <link rel="icon" sizes="512x512" href="">
+    <link rel="icon" sizes="300x300" href="">
+    <link rel="icon" sizes="180x180" href="">
+    <link rel="icon" sizes="96x96" href="">
+    <link rel="icon" sizes="32x32" href="">
+    <link rel="icon" sizes="16x16" href="">
+    <!-- // styles -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/htmx/1.9.11/htmx.min.js"
+        integrity="sha512-9KsixJxn00SQfLkrArzXRFi3QyqP4RyIzYgj2Ho4YJSLEOHS00uhDQdc7dv6N8PS5OsYZWKiY0/7DsZRlcv/DQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.8/cdn.js"
+        integrity="sha512-hN6ogT3v4Qd7huxKH/Pg0ZomVLJ1cxvjeZyLfuuq8CgYs+VwrFsbyTE9gHKQEw7gQQNeAZCGumF2XHPdx7BL7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+    <script src="//cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        waffle: {
+                            '50': '#effef5',
+                            '100': '#d9ffeb',
+                            '200': '#b4fed7',
+                            '300': '#8bfbc1',
+                            '400': '#3aee92',
+                            '500': '#10d771',
+                            '600': '#07b25b',
+                            '700': '#098c4a',
+                            '800': '#0d6e3e',
+                            '900': '#0d5a35',
+                            '950': '#01321b',
+                        }
+                    }
+                }
+            },
+            darkMode: ["class", "[data-theme='dark']"],
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        section.tw-box {
+        @apply py-[10px] px-[20px] rounded-[12px] shadow
+        bg-white dark:bg-white/10
+    }
+    section.tw-box > h1 {
+        @apply text-xl font-bold
+    }
+    main > form {
+        @apply hidden
+    }
+    html {
+        @apply
+        text-black/70 dark:text-white/70
+        border-gray-200 dark:border-white/10
+    }
+</style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+        integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <style>
+        body {
+            font-size: 0.9rem;
+        }
+    </style>
+    <style>
+        nav {
+            font-size: 1rem;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+
+
+
+
+</head>
+<body>
+    <style>
+        /* commons */
+        html.active,
+        body.active {
+            height: 100%;
+            overflow-y: hidden;
+        }
+
+        header {
+            color: #000000;
+            background-color: #ffffff;
+        }
+
+        header a {
+            color: #000000;
+        }
+
+        [data-theme='dark'] header {
+            color: #bdbdbd;
+            background-color: #222222;
+        }
+
+        [data-theme='dark'] header #toggleBtn {
+            color: #bdbdbd;
+        }
+
+        [data-theme='dark'] header #alarmBtn a {
+            color: #bdbdbd;
+        }
+
+        @media (min-width: 1251px) {
+            header {
+                width: 100%;
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            header #toggleBtn {
+                display: none;
+            }
+
+            header #alarmBtn {
+                display: none;
+            }
+
+            header #nav {
+                background-color: #888888;
+            }
+        }
+
+        @media (max-width: 1250px) {
+            header {
+                position: fixed;
+                width: 100%;
+                z-index: 5;
+            }
+
+            main {
+                margin-top: 90px !important;
+            }
+
+            header #toggleBtn,
+            header #alarmBtn {
+                position: absolute;
+                width: 70px;
+                height: 70px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #888;
+                cursor: pointer;
+            }
+
+            header #toggleBtn {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+            }
+
+            header #alarmBtn {
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: flex;
+                display: none;
+                /* TODO : 알림 */
+            }
+
+            header #toggleBtn svg,
+            header #alarmBtn svg {
+                width: 24px;
+            }
+
+            header #alarmBtn a {
+                color: #888;
+            }
+
+            header #alarmBtn .count {
+                position: absolute;
+                top: 20px;
+                right: 10px;
+                font-size: 0.7em;
+                color: #fff;
+                background-color: red;
+                padding: 4px 6px;
+                border-radius: 12px;
+            }
+        }
+
+        /* middle */
+        @media (min-width: 1251px) {
+            header #sub {
+                width: 1250px;
+                height: 40px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            header #sub ul {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            header #sub ul li a {
+                display: flex;
+                padding: 0 10px;
+            }
+
+            header #sub ul li a:hover {
+                color: #000;
+            }
+
+            header #sub ul .slash {
+                color: rgba(0, 0, 0, 0.2);
+            }
+
+            [data-theme='dark'] header #sub ul li a {
+                color: rgba(255, 255, 255, 0.3);
+            }
+
+            [data-theme='dark'] header #sub ul li a:hover {
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+            [data-theme='dark'] header #sub ul .slash {
+                color: rgba(255, 255, 255, 0.1);
+            }
+
+            header #main {
+                width: 1250px;
+                height: 100px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            header #main .logo {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                font-size: 3em;
+                font-weight: bold;
+            }
+
+            header #main .logo img {
+                width: 300px;
+                max-height: 70px;
+                object-fit: contain;
+            }
+
+            [data-theme='dark'] header #main .logo a {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            header #main .search {}
+
+            header #main .search form {
+                height: 44px;
+                display: flex;
+                border-radius: 16px;
+                border: 2px solid #bbb;
+            }
+
+            header #main .search form:hover {
+                border: 2px solid #999;
+            }
+
+            [data-theme='dark'] header #main .search form {
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+
+            [data-theme='dark'] header #main .search form:hover {
+                border: 2px solid rgba(255, 255, 255, 0.5);
+            }
+
+            header #main .search input {
+                flex: 1;
+                height: 100%;
+                padding: 0 18px;
+                color: #000000;
+                background-color: unset;
+                border: unset;
+            }
+
+            [data-theme='dark'] header #main .search input {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            header #main .search button {
+                height: 100%;
+                padding: 0 20px;
+                background-color: unset;
+                border: unset;
+            }
+
+            [data-theme='dark'] header #main .search button {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            header #main .search button svg {
+                width: 16px;
+                color: #000000;
+            }
+        }
+
+        @media (max-width: 1250px) {
+            header #sub {
+                display: none;
+            }
+
+            header #main .logo {
+                width: 100%;
+                height: 70px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.6em;
+                font-weight: bold;
+            }
+
+            header #main .logo img {
+                width: 200px;
+                max-height: 50px;
+                object-fit: contain;
+            }
+
+            [data-theme='dark'] header #main .logo a {
+                color: #bdbdbd;
+            }
+
+            header #main .search {
+                width: 100%;
+                display: none;
+            }
+
+            header #main .search.active {
+                display: flex;
+            }
+
+            header #main .search form {
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            header #main .search input {
+                flex: 1;
+            }
+
+            header #main .search button {}
+
+            header #main .search button svg {
+                width: 16px;
+            }
+        }
+
+        /* nav */
+        @media (min-width: 1251px) {
+            header #nav {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            [data-theme='dark'] header #nav {
+                background-color: #393939;
+            }
+
+            header #nav.hover {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 1100;
+            }
+
+            header #nav .mypage {
+                display: none;
+            }
+
+            header nav {
+                width: 1250px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+
+            [data-theme='dark'] header nav {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            header nav>ul {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            header nav>ul>li {
+                position: relative;
+                flex: 1;
+            }
+
+            header nav>ul>li:hover {
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+
+            [data-theme='dark'] header nav>ul>li:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+
+            header nav>ul>li:hover>.menu>a {
+                color: #db3232;
+            }
+
+            [data-theme='dark'] header nav>ul>li:hover>.menu>a {
+                color: #db3232;
+            }
+
+            header nav>ul>li>.menu>a {
+                height: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                text-align: center;
+                padding: 0 10px;
+            }
+
+            header nav>ul>li .dropdownBtn {
+                display: none;
+            }
+
+            header nav>ul>li>ul {
+                position: absolute;
+                width: 100%;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+                z-index: 5;
+            }
+
+            header nav>ul>li:hover>ul {
+                display: flex;
+            }
+
+            header nav>ul>li>ul>li {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
+                border-bottom: 1px solid #eee;
+            }
+
+            [data-theme='dark'] header nav>ul>li>ul>li {
+                background-color: #888;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            header nav>ul>li>ul>li:last-child {
+                border-bottom: unset;
+            }
+
+            header nav>ul>li>ul>li>a {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #000;
+                padding: 20px 0;
+            }
+
+            header nav>ul>li>ul>li>a:hover {
+                background-color: #eee;
+            }
+
+            [data-theme='dark'] header nav>ul>li>ul>li>a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @media (max-width: 1250px) {
+            header #nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: none;
+                /* display: flex; */
+                justify-content: center;
+                align-items: flex-start;
+                flex-direction: column;
+                z-index: 100;
+            }
+
+            header #nav.active {
+                display: flex;
+            }
+
+            header #nav .navWrap {
+                width: 70%;
+                height: 100%;
+                max-width: 340px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                background-color: #fff;
+                overflow-y: scroll;
+                z-index: 5;
+            }
+
+            [data-theme='dark'] header #nav .navWrap {
+                background-color: #333;
+            }
+
+            header #nav a {
+                color: #000;
+            }
+
+            [data-theme='dark'] header #nav a {
+                color: #fff;
+            }
+
+            /* mypage */
+            header #nav .mypage {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                font-size: 0.9em;
+                margin: 0 10px;
+                margin-top: 20px;
+            }
+
+            header #nav .mypage li {
+                flex: 1;
+            }
+
+            header #nav .mypage li a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                padding: 10px 0;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            [data-theme='dark'] header #nav .mypage li a {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            header #nav .mypage li a:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+                border: 1px solid rgba(0, 0, 0, 0.3);
+            }
+
+            header #nav nav {
+                height: 100%;
+            }
+
+            header #nav .navBackground {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 3;
+                cursor: pointer;
+            }
+
+            header nav>ul>li {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            }
+
+            header nav>ul>li:first-child {
+                border-top: 1px solid rgba(0, 0, 0, 0.2);
+            }
+
+            header nav>ul>li>.menu {
+                display: flex;
+            }
+
+            header nav>ul>li>.menu>a {
+                flex: 1;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                font-weight: bold;
+                padding: 14px 10px;
+            }
+
+            [data-theme='dark'] header nav>ul>li>.menu>a {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            header nav>ul>li>.menu>a:hover {}
+
+            header nav>ul>li .dropdownBtn {
+                width: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #888;
+                cursor: pointer;
+            }
+
+            header nav>ul>li .dropdownBtn svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            /* subMenus */
+            header nav>ul>li>ul {
+                display: none;
+                /* display: flex; */
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+
+            header nav>ul>li>ul.active {
+                display: flex;
+            }
+
+            header nav>ul>li>ul>li {
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            header nav>ul>li>ul>li>a {
+                display: flex;
+                padding: 14px 24px;
+            }
+
+            [data-theme='dark'] header nav>ul>li>ul>li>a {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            header nav>ul>li>ul>li>a:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+    
+    <header>
+        <div id="toggleBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor"
+                    d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
+            </svg>
+        </div>
+        <div id="alarmBtn">
+            <a href="/alarm">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path fill="currentColor"
+                        d="M256 32V49.88C328.5 61.39 384 124.2 384 200V233.4C384 278.8 399.5 322.9 427.8 358.4L442.7 377C448.5 384.2 449.6 394.1 445.6 402.4C441.6 410.7 433.2 416 424 416H24C14.77 416 6.365 410.7 2.369 402.4C-1.628 394.1-.504 384.2 5.26 377L20.17 358.4C48.54 322.9 64 278.8 64 233.4V200C64 124.2 119.5 61.39 192 49.88V32C192 14.33 206.3 0 224 0C241.7 0 256 14.33 256 32V32zM216 96C158.6 96 112 142.6 112 200V233.4C112 281.3 98.12 328 72.31 368H375.7C349.9 328 336 281.3 336 233.4V200C336 142.6 289.4 96 232 96H216zM288 448C288 464.1 281.3 481.3 269.3 493.3C257.3 505.3 240.1 512 224 512C207 512 190.7 505.3 178.7 493.3C166.7 481.3 160 464.1 160 448H288z" />
+                </svg>
+            </a>
+        </div>
+        <section id="sub">
+            <ul>
+                <li>
+                    <a href="/best/monthly">월간 인기 게시글</a>
+                </li>
+                <li class="slash">|</li>
+                <li>
+                    <a href="/best/daily">일간 인기 게시글</a>
+                </li>
+            </ul>
+            <ul>
+                <a>다크 및 라이트 테마변경</a>
+                <li class="slash">|</li>
+                <li>
+                    <select
+                        onchange="document.cookie = `theme=${this.value}; path=/;`; document.body.dataset.theme = this.value;"
+                        class="ring-1 ring-inset ring-gray-200 px-2 rounded-lg mr-2 dark:bg-black/10">
+                        <option value="light" selected="selected">라이트</option>
+                        <option value="dark">다크</option>
+                    </select>
+                </li>
+                
+            </ul>
+        </section>
+        <section id="main">
+            <a href="/testhtml.html" class="logo">
+                ITDOTCOM </a>
+            <div class="search">
+                <form action="/search" method="GET">
+                    <input type="text" name="q" placeholder="검색어">
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </section>
+        <section id="nav">
+            <div class="navWrap">
+                <ul class="mypage">
+                    <li>
+                        <a href="testhtml.html">회원가입</a>
+                    </li>
+                    <li>
+                        <a href="/login">로그인</a>
+                    </li>
+                </ul>
+                <nav>
+                    <ul>
+                        <li>
+                            <div class="menu">
+                                <a href="comlist.html">커뮤니티</a>
+                                <div class="dropdownBtn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                        <path fill="currentColor"
+                                            d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>
+                                    <a href="comlist.html">자유게시판</a>
+                                </li>
+                                <li>
+                                    <a href="/posts/뉴스">IT뉴스</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="menu">
+                                <a href="/posts/갤러리">갤러리</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="menu">
+                                <a href="http://www.youtube.com">유튜브</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="menu">
+                                <a href="compare.html">성능비교</a>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div class="navBackground"></div>
+        </section>
+    </header>
+    <script>
+        const html = document.querySelector('html');
+        const body = document.querySelector('body');
+        const header = document.querySelector('header');
+        const nav = document.querySelector('#nav');
+        const subHeight = header.querySelector('#sub').clientHeight;
+        const mainHeight = header.querySelector('#main').clientHeight;
+        const headerHeight = subHeight + mainHeight;
+    
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > headerHeight) {
+                nav.classList.add('hover');
+                header.style.marginBottom = `${60}px`;
+            } else {
+                nav.classList.remove('hover');
+                header.style.marginBottom = 'unset';
+            }
+        });
+    
+        const toggleBtn = document.querySelector('header #toggleBtn');
+        const navContainer = document.querySelector('header #nav');
+        const navBackground = document.querySelector('header #nav .navBackground');
+    
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                navContainer.classList.toggle('active');
+                html.classList.toggle('active');
+                body.classList.toggle('active');
+            });
+        }
+      
+        if (navBackground) {
+            navBackground.addEventListener('click', () => {
+                navContainer.classList.toggle('active');
+                html.classList.toggle('active');
+                body.classList.toggle('active');
+            });
+        }
+    
+        const menus = document.querySelectorAll('header nav > ul > li');
+        menus.forEach(menu => {
+            const dropdownBtn = menu.querySelector('.dropdownBtn');
+            const subMenu = menu.querySelector('ul');
+            if (dropdownBtn) {
+                dropdownBtn.addEventListener('click', () => {
+                if (subMenu) {
+                    subMenu.classList.toggle('active');
+                }
+                });
+            }
+        });
+    </script>
+    <main>
+        
+    <style>
+        #join {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #join .title {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        #join .direct {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        #join .direct input {
+            width: 100%;
+            height: 50px;
+            padding: 0 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            border: unset;
+        }
+        
+        #join .direct button {
+            width: 100%;
+            height: 50px;
+            color: #fff;
+            background-color: #434B57;
+            border-radius: 8px;
+            border: 0;
+        }
+        
+        #join .direct button:hover {
+            background-color: #353C45;
+        }
+        
+        #join .agreement {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        #join .agreement .item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        #join .agreement textarea {
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            border-radius: 8px;
+            border: unset;
+        }
+        
+        #join .agreement .check {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #join .agreement .check label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        #join .button {
+            width: 400px;
+        }
+        
+        #join .button button {
+            width: 100%;
+            height: 50px;
+            color: #fff;
+            background-color: #434B57;
+            border-radius: 8px;
+            border: 0;
+        }
+        
+        @media (max-width: 400px) {
+            #join .direct {
+                width: 100%;
+            }
+            
+            #join .agreement {
+                width: 100%;
+            }
+            
+            #join .button {
+                width: 100%;
+            }
+        }
+    </style>
+    
+    <form action="/join" method="post" onsubmit="return onSubmit()" id="joinForm">
+    </form>
+    
+    <article id="join">
+        <section class="title">
+            <h1>회원가입</h1>
+        </section>
+        <section class="direct" x-data="{}">
+                <input type="text" name="loginId" form="joinForm" placeholder="아이디">
+                <input type="password" name="password" form="joinForm" placeholder="비밀번호 (6자리 이상)">
+                <input type="password" name="password2" form="joinForm" placeholder="비밀번호 확인">
+            <div style="display: flex; gap: 0.5rem;">
+                <input type="text" name="name" form="joinForm" placeholder="닉네임 (2~10)">
+                <button style="width: 100px;" type="button" x-on:click="checkNameDup()">중복 검사</button>
+            </div>
+            <span x-show="$store.isNameDup === false" style="color: green; display: none;">사용할 수 있는 닉네임입니다</span>
+            <span x-show="$store.isNameDup === true" style="color: red; display: none;">사용할 수 없는 닉네임입니다</span>
+            <input type="text" name="email" form="joinForm" placeholder="이메일">
+        </section>
+        <section class="agreement">
+                <div class="item">
+                    <div class="label">사이트 이용약관</div>
+                    <textarea readonly style="height: 120px;">ITDOTCOM 최종 사용자 이용약관
+    
+ITDOTCOM을 이용하는 모든 사용자들을 비방, 모욕, 기타 사유에 해당하는 회원일 경우 회원 정보가 제제, 수정될 수 있습니다.
+    </textarea>
+                </div>
+                <div class="item">
+                    <div class="label">개인정보처리방침</div>
+                    <textarea readonly style="height: 120px;">개인정보 처리 방침 세부 사항 입력 자리
+                    </textarea>
+                </div>
+            <div class="check">
+                <label>
+                    <input type="checkbox" id="agree">
+                    <span>위 내용을 모두 확인하였으며, 모두 동의합니다</span>
+                </label>
+            </div>
+        </section>
+        <section class="button">
+            <button form="joinForm">회원가입</button>
+        </section>
+            <section id="socialAuth" class="socialLogin">
+            </section>
+    </article>
+    
+    <script>
+    function onSubmit() {
+        const agreed = document.querySelector('#agree').checked;
+        if (!agreed) {
+            alert('약관에 동의해주세요');
+            return false
+        }
+        
+        if (joinForm.emailVerified !== undefined && joinForm.emailVerified.value !== 'true') {
+            alert('인증에 실패하였습니다')
+            return false
+        }
+        
+        if (joinForm.phoneVerified !== undefined && joinForm.phoneVerified.value !== 'true') {
+            alert('인증에 실패하였습니다')
+            return false
+        }
+        
+        return true
+    }
+    
+    document.addEventListener("alpine:init", async() => {
+        Alpine.store("isNameDup", 0)
+    })
+    
+    async function checkNameDup() {
+        const name = document.querySelector("input[name=name]").value
+        const res = await fetch(`/isNameDup?name=${name}`)
+        const bool = await res.json()
+        Alpine.store("isNameDup", bool)
+    }
+    </script>
+    </main>
+    
+    
+    
+    <div style="display: none;">
+    </div>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", async() => {
+        const ws = new WebSocket('wss://mpeh278xca.execute-api.ap-northeast-2.amazonaws.com/prod?a=')
+        
+        ws.onmessage = (e) => {
+            if (e.data === "ping") return
+            
+            const data = JSON.parse(e.data)
+            
+            const chatMessagePayload = data.chatMessagePayload
+            if (chatMessagePayload !== null && chatMessagePayload !== undefined) {
+                const updatedChatMessages = (Alpine.store('chatMessages_' + chatMessagePayload.chatRoomId) ?? [])
+                updatedChatMessages.push(chatMessagePayload)
+                Alpine.store('chatMessages_' + chatMessagePayload.chatRoomId, updatedChatMessages)
+                Alpine.nextTick(() => {
+                    const dom = document.querySelector("#chatAppMessages_" + chatMessagePayload.chatRoomId)
+                    if (dom) dom.scrollTop = dom.scrollHeight
+                })
+                
+                
+                // chat list update
+                if (chatMessagePayload.chatRoomId !== 'index') {
+                    const chatList = Alpine.store('chatList')
+                    if (chatList !== undefined) {
+                        const index = chatList.findIndex(a => a.chatRoomId === chatMessagePayload.chatRoomId)
+                        if (index !== -1) {
+                            const updatedChat = chatList[index]
+                            updatedChat.message = chatMessagePayload.message
+                            chatList.splice(index, 1)
+                            chatList.unshift(updatedChat)
+                            Alpine.store('chatList', [...chatList])
+                        } else {
+                            Alpine.store('chatList').unshift(chatMessagePayload)
+                        }
+                    }
+                }
+            }
+            
+            const realTimeNotificationPayload = data.realTimeNotificationPayload
+            if (realTimeNotificationPayload !== null && realTimeNotificationPayload !== undefined) {
+                Alpine.store('realTimeNotifications').push(realTimeNotificationPayload)
+            }
+        }
+    })
+    </script>
+    
+    <script>
+            const getCookie = name => {
+                let matches = document.cookie.match(
+                    new RegExp(
+                        "(?:^|; )" +
+                            name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+                            "=([^;]*)",
+                    ),
+                );
+                return matches ? decodeURIComponent(matches[1]) : undefined;
+            };
+    
+            const setCookie = (name, value, options = {}) => {
+                options = {
+                    path: "/",
+                    ...options,
+                };
+                if (options.expires instanceof Date) {
+                    options.expires = options.expires.toUTCString();
+                }
+    
+                let updatedCookie =
+                    encodeURIComponent(name) + "=" + encodeURIComponent(value);
+    
+                for (let optionKey in options) {
+                    updatedCookie += "; " + optionKey;
+                    let optionValue = options[optionKey];
+                    if (optionValue !== true) {
+                        updatedCookie += "=" + optionValue;
+                    }
+                }
+    
+                document.cookie = updatedCookie;
+            };
+    
+            const deleteCookie = name => {
+                setCookie(name, "", {
+                    "max-age": -1,
+                });
+            };
+    
+            const shuffle = array => {
+                return array.sort(() => Math.random() - 0.5);
+            };
+        </script>
+    
+        <style>
+                .section {
+                    border-radius: 12px;
+                }
+    
+                #widget .widget.List {
+                    border-radius: 12px;
+                }
+    
+                #widget .widget.Photo {
+                    border-radius: 12px;
+                }
+    
+                #widget .widget.Photo .image img {
+                    border-radius: 8px;
+                }
+    
+                #widget .widget.Photo .image .none {
+                    border-radius: 8px;
+                }
+    
+                #widget .widget.Dropdown .item {
+                    border-radius: 12px;
+                }
+    
+                #widget .widget.Bookmark .widgetTitle {
+                    border-radius: 12px;
+                }
+    
+                #widget .widget.Bookmark {
+                    gap: 20px;
+                }
+    
+                #widget .widget.Bookmark .item {
+                    border-radius: 10px;
+                }
+    
+                #widget .widget.Content .item {
+                    border-radius: 12px;
+                }
+            </style>
+        <script>
+                document.body.removeAttribute("data-theme");
+                localStorage.setItem("theme", "light");
+                setCookie("theme", "light");
+            </script>
+    <style>
+    </style>
+    
+    <style>
+        footer {
+           display: flex; 
+           justify-content: center;
+           align-items: center;
+           flex-direction: column;
+           gap: 20px;
+           text-align: center;
+           padding: 20px 0;
+        }
+        
+        footer .info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        footer .info .link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+    </style>
+    
+    <footer>
+        <section class="footerText">
+            
+        </section>
+        <section class="info">
+            <div>
+            </div>
+            <div class="link">
+                <a href="/about">사이트 이용약관</a>
+                <a href="/about">개인정보처리방침</a>
+            </div>
+            <div>
+                <div>ITDOTCOM</div>
+            </div>
+        </section>
+    </footer><!-- scripts -->
+    <!-- // scripts -->
+    
+    
+    
+    
+    
+    
+    <style>
+        body {
+            color: #000000;
+            background-color: #ebedf3;
+        }
+        
+        [data-theme="dark"] {
+            color: #bdbdbd;
+            background-color: #222222;
+        }
+        
+        [data-theme='dark'] body {
+            color: #bdbdbd;
+            background-color: #222222;
+        }
+        
+        [data-theme='dark'] a {
+            color: #bdbdbd;
+        }
+    </style>
+    
+    <script>
+        const popupBanners = document.querySelectorAll('#popupBanner .banner');
+        popupBanners.forEach(popupBanner => {
+            const closeBtn = popupBanner.querySelector('.close');
+            const permanentCloseBtn = popupBanner.querySelector('.permanentClose');
+            const bannerId = popupBanner.getAttribute('bannerId');
+            
+            closeBtn.addEventListener('click', () => {
+                popupBanner.classList.add('deactivate');
+            });
+            
+            permanentCloseBtn.addEventListener('click', () => {
+                popupBanner.classList.add('deactivate');
+                const blockBannerDatas = getCookie('blockBanners');
+                if (blockBannerDatas) {
+                    const cookieDatas = JSON.parse(blockBannerDatas);
+                    if (!cookieDatas.find(cookieData => cookieData === bannerId)) {
+                    cookieDatas.push(bannerId);
+                    setCookie('blockBanners', JSON.stringify(cookieDatas));
+                    }
+                } else {
+                    const datas = [bannerId];
+                    setCookie('blockBanners', JSON.stringify(datas));
+                }
+            });
+        });
+    </script>
+    
+    </body>
+</html>
